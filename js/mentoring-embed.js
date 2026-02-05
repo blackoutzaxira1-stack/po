@@ -55,6 +55,37 @@ document.addEventListener('DOMContentLoaded', function () {
     // Replace the card content with only the video
     card.innerHTML = buildMentoringHTML();
 
+    // After injecting, enhance the video element for wider compatibility and add fallbacks
+    const videoEl = card.querySelector('video.mentoring-video');
+    if (videoEl) {
+      // Helpful attributes for mobile and iOS
+      videoEl.setAttribute('playsinline', '');
+      videoEl.setAttribute('webkit-playsinline', '');
+      videoEl.setAttribute('preload', 'metadata');
+      // Ensure controls show
+      videoEl.setAttribute('controls', '');
+
+      // If browser cannot play MP4, show a friendly fallback with download link
+      let fallbackShown = false;
+      videoEl.addEventListener('error', function () {
+        if (fallbackShown) return;
+        fallbackShown = true;
+        card.innerHTML = `<div class="mentoring-video-fallback">Video brauzeringizda to'g'ri o'ynatib bo'lmadi. <a href="/img/aziza.mp4" download>Tugmani bosib yuklab oling</a> yoki boshqa brauzerni sinab ko'ring.</div>`;
+      });
+
+      // Try to detect support quickly
+      try {
+        if (typeof videoEl.canPlayType === 'function') {
+          const canPlay = videoEl.canPlayType('video/mp4; codecs="avc1.42E01E, mp4a.40.2"');
+          if (canPlay === '' || canPlay === 'no') {
+            // Not a strong signal of support; keep video but prepare fallback on error
+          }
+        }
+      } catch (e) {
+        // ignore
+      }
+    }
+
     // Refresh AOS if present so animations work after DOM injection
     if (window.AOS && typeof window.AOS.refresh === 'function') window.AOS.refresh();
   }

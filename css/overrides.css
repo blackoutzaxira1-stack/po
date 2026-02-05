@@ -84,6 +84,24 @@
   }
 }
 
+/* Fallback styling when video cannot be played */
+.mentoring-video-fallback {
+  padding: 2rem;
+  text-align: center;
+  background: hsl(0 0% 6% / 0.02);
+  color: hsl(var(--foreground));
+  border-radius: 0.75rem;
+}
+.mentoring-video-fallback a {
+  display: inline-block;
+  margin-top: 0.75rem;
+  background: var(--gradient-gold);
+  color: hsl(var(--primary-foreground));
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+
 /* ========================================
    FOOTER YOUTUBE LINK
    ======================================== */
