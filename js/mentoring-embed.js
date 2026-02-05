@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
       return `
         <div class="mentoring-video-wrapper">
           <video class="mentoring-video" controls playsinline preload="metadata">
-            <source src="/img/aziza.mp4" type="video/mp4">
+            <source src="./img/aziza.mp4" type="video/mp4">
             Your browser does not support the video tag.
           </video>
         </div>
